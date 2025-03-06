@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 
 namespace Calculadora_PDM;
-
+//Cambios acertados
 public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
