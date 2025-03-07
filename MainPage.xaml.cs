@@ -1,12 +1,15 @@
-﻿namespace Calculadora_PDM
+﻿using Calculadora_PDM.MVVM;
+using Calculadora_PDM.MVVM.ViewModels;
+namespace Calculadora_PDM
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
 
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new CalcViewModel();
+            
         }
 
         //private void OnCounterClicked(object sender, EventArgs e)

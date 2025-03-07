@@ -4,6 +4,38 @@
              x:Class="Calculadora_PDM.MainPage"
              BackgroundColor="{DynamicResource Theme_BackgroundBrush}">
 
+    <ContentPage.Resources>
+        <Style x:Key="Font_Buttons1"
+               TargetType="Button" >
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="BackgroundColor" Value="CornflowerBlue" />
+            <Setter Property="Margin" Value="0,0,8,8"/>
+            <Setter Property="TextColor" Value="White"/>
+        </Style>
+
+        <Style x:Key="Font_Buttons2"
+               TargetType="Button" >
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="BackgroundColor" Value="GreenYellow" />
+            <Setter Property="Margin" Value="0,0,8,8"/>
+        </Style>
+
+        <Style x:Key ="Numbers_Display"
+               TargetType="Label">
+            <Setter Property="FontSize" Value="45" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+        <Style x:Key ="Numbers_Result"
+               TargetType="Label">
+            <Setter Property="FontSize" Value="45" />
+            <Setter Property="FontAttributes" Value="Bold" />
+        </Style>
+
+    </ContentPage.Resources>
+    
     <Grid RowDefinitions="200, *">
 
         <!-- Pantalla de la calculadora -->
@@ -12,57 +44,172 @@
                 StrokeShape="RoundRectangle 0 0 25 25" />
             
             <VerticalStackLayout>
-                <Label Text="- - - " 
-                    FontSize="22" 
-                    FontAttributes="Bold" 
+         <!-- Operacion-->
+            <Label  
+                    Style="{StaticResource Numbers_Display}"
+                    Text="{Binding Operation}"
                     HorizontalOptions="End" 
                     VerticalOptions="Center" 
-                    Margin="0,10,15,0"
+                    Margin="0,25,15,0"
                     TextColor="{DynamicResource Theme_TextBrush}" />
-            <Label Text="= 0" 
-                    FontSize="22" 
-                    FontAttributes="Bold" 
+         <!-- Resultado -->
+            <Label  
+                    Style="{StaticResource Numbers_Result}"
+                    Text="{Binding Result}"
                     HorizontalOptions="End" 
                     VerticalOptions="Center" 
                     Margin="0,22,10,0"
                     TextColor="{DynamicResource Theme_TextBrush}" />
             </VerticalStackLayout>
 
-
-
             <!-- Botones de la calculadora -->
         <Grid Grid.Row="1"
-            RowDefinitions=" * , *, *, *, *"
+            RowDefinitions=" * , *, *, *, *, *"
             ColumnDefinitions="*,*,*,*" >
+            
             <!-- Fila 0 -->
-            <Button Text="%"    Grid.Row="0" Grid.Column="0"  FontSize="18" BackgroundColor="GreenYellow" Margin="0,0,8,8"/>
-            <Button Text="xⁿ"   Grid.Row="0" Grid.Column="1"  FontSize="18" BackgroundColor="GreenYellow" Margin="0,0,8,8"/>
-            <Button Text="x⁻¹"  Grid.Row="0" Grid.Column="2"  FontSize="18" BackgroundColor="GreenYellow" Margin="0,0,8,8"/>
-            <Button Text="M"   Grid.Row="0" Grid.Column="3"  FontSize="18" BackgroundColor="GreenYellow" Margin="0,0,0,8"/>
+            <Button Text="√" Grid.Row="0" Grid.Column="0"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="√"                    
+                    />
+
+            <Button Text="M" Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding MemoryCommand}"
+                    />
+
+            <Button Text="AC" Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding AllClearCommand}"
+                    />
+
+            <Button Text="⌫" Grid.Row="0" Grid.Column="3"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding DeletleCommand}"
+                    />
 
             <!-- Fila 1 -->
-            <Button Text="7" Grid.Row="1" Grid.Column="0"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="8" Grid.Row="1" Grid.Column="1"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="9" Grid.Row="1" Grid.Column="2"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="+" Grid.Row="1" Grid.Column="3"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,0,8"/>
+            <Button Text="%" Grid.Row="1" Grid.Column="0"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="%"                    
+                    />
+
+            <Button Text="xⁿ" Grid.Row="1" Grid.Column="1"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="^"                    
+                    />
+
+            <Button Text="⅟x" Grid.Row="1" Grid.Column="2"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="⅟"
+                    />
+
+            <Button Text="÷" Grid.Row="1" Grid.Column="3"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="/"                    
+                    />
 
             <!-- Fila 2 -->
-            <Button Text="4" Grid.Row="2" Grid.Column="0"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="5" Grid.Row="2" Grid.Column="1"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="6" Grid.Row="2" Grid.Column="2"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="-" Grid.Row="2" Grid.Column="3"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,0,8"/>
+            
+            <Button Text="7" Grid.Row="2" Grid.Column="0"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="7"
+                    />
 
-            <!-- Fila 3 -->
-            <Button Text="1" Grid.Row="3" Grid.Column="0"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="2" Grid.Row="3" Grid.Column="1"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="3" Grid.Row="3" Grid.Column="2"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,8"/>
-            <Button Text="⨯" Grid.Row="3" Grid.Column="3"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,0,8"/>
+            <Button Text="8" Grid.Row="2" Grid.Column="1"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="8"
+                    />
 
-            <!-- Fila 4 -->
-            <Button Text="0" Grid.Row="4" Grid.Column="0"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,0"/>
-            <Button Text="." Grid.Row="4" Grid.Column="1"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,0"/>
-            <Button Text="=" Grid.Row="4" Grid.Column="2"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,0"/><Button Text="=" Grid.Row="4" Grid.Column="2"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,8,0"/>
-            <Button Text="÷" Grid.Row="4" Grid.Column="3"  FontSize="22" BackgroundColor="CornflowerBlue" Margin="0,0,0,0"/>
+            <Button Text="9" Grid.Row="2" Grid.Column="2"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="9"
+                    />
+
+            <Button Text="×" Grid.Row="2" Grid.Column="3"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="*"                    
+                    />
+
+            <!-- Fila 3  -->
+
+            <Button Text="4" Grid.Row="3" Grid.Column="0"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="4"
+                    />
+
+            <Button Text="5" Grid.Row="3" Grid.Column="1"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="5"
+                    />
+
+            <Button Text="6" Grid.Row="3" Grid.Column="2"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="6"
+                    />
+
+            <Button Text="-" Grid.Row="3" Grid.Column="3"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="-"                    
+                    />
+
+            <!-- Fila 4  -->
+
+            <Button Text="1" Grid.Row="4" Grid.Column="0"  
+                Style="{StaticResource Font_Buttons1}"
+                Command="{Binding OperationCommand}"
+                CommandParameter="1"
+            />
+
+            <Button Text="2" Grid.Row="4" Grid.Column="1"  
+                Style="{StaticResource Font_Buttons1}"
+                Command="{Binding OperationCommand}"
+                CommandParameter="2"
+            />
+
+            <Button Text="3" Grid.Row="4" Grid.Column="2"  
+                Style="{StaticResource Font_Buttons1}"
+                Command="{Binding OperationCommand}"
+                CommandParameter="3"
+            />
+
+            <Button Text="+" Grid.Row="4" Grid.Column="3"
+                Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="+"                    
+            />
+
+            <!-- Fila 5 -->
+
+            <Button Text="." Grid.Row="5" Grid.Column="0"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="."
+                    />
+
+            <Button Text="0" Grid.Row="5" Grid.Column="1"  
+                    Style="{StaticResource Font_Buttons1}"
+                    Command="{Binding OperationCommand}"
+                    CommandParameter="0"
+                    />
+
+            <Button Text="=" Grid.Row="5"  Grid.Column ="2"  Grid.ColumnSpan="2"
+                    Style="{StaticResource Font_Buttons2}"
+                    Command="{Binding ResultCommand}"                
+                    />
         </Grid>
     </Grid>
 </ContentPage>
